@@ -34,6 +34,17 @@ class Main extends PluginBase implements Listener
 
     /**
      * @param Player $p
+     * @param string $color
+     */
+    public static function setColor(Player $p, string $color): void
+    {
+        $nbt = $p->namedtag;
+
+        $nbt->setInt(self::NBT, $color);
+    }
+
+    /**
+     * @param Player $p
      * @return string
      */
     private function getColor(Player $p): string
@@ -41,7 +52,7 @@ class Main extends PluginBase implements Listener
         $nbt = $p->namedtag;
 
         if ($nbt->offsetExists(self::NBT)) {
-            $color = $nbt->getInt(self::NBT);
+            $color = $this->changeColor($nbt->getInt(self::NBT));
         } else {
             $color = 'r';
         }
@@ -50,14 +61,12 @@ class Main extends PluginBase implements Listener
     }
 
     /**
-     * @param Player $p
      * @param int $color
+     * @return string
      */
-    public static function setColor(Player $p, int $color): void
+    private function changeColor(int $color): string
     {
-        $nbt = $p->namedtag;
-
-        $nbt->setInt(self::NBT, $color);
+        return ColorChatForm::LIST[$color];
     }
 
     public function onDisable()

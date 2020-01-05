@@ -9,6 +9,54 @@ use pocketmine\Player;
 
 class ColorChatForm implements Form
 {
+    public const LIST = array(
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "a",
+        "b",
+        "c",
+        "d",
+        "e",
+        "f",
+        "k",
+        "l",
+        "m",
+        "n",
+        "o",
+        "r"
+    );
+
+    private const COLORLIST = array(
+        "§1Dark Blue",
+        "§2Dark Green",
+        "§3Dark Aqua",
+        "§4Dark Red",
+        "§5Dark Purple",
+        "§6Gold",
+        "§7Gray",
+        "§8Dark Gray",
+        "§9Blue",
+        "§aGreen",
+        "§bAqua",
+        "§cRed",
+        "§dLight Purple",
+        "§eYellow",
+        "§fWhite",
+        "§kObfuscated",
+        "§lBold",
+        "§mStrikethrough",
+        "§nUnderline",
+        "§oItalic",
+        "§rReset"
+    );
+
     public function jsonSerialize()
     {
         return [
@@ -17,13 +65,12 @@ class ColorChatForm implements Form
             'content' => [
                 [
                     "type" => "label",
-                    "text" => "チャットを送信する時のデフォルトの色を変更できます"
+                    "text" => "チャットを送信する時のデフォルトの色を変更できます",
                 ],
                 [
-                    "type" => "input",
+                    "type" => "dropdown",
                     "text" => "",
-                    "placeholder" => "int",
-                    "default" => ""
+                    "options" => self::COLORLIST,
                 ],
             ]
         ];
@@ -35,12 +82,8 @@ class ColorChatForm implements Form
             return;
         }
         if (isset ($data[1])) {
-            if (!is_numeric($data[1])) {
-                $player->sendMessage(Main::NOTICE . '数値を入力してください');
-                return;
-            }
             Main::setColor($player ,$data[1]);
-            $player->sendMessage(Main::NOTICE . '変更しました');
+            $player->sendMessage(Main::NOTICE.'変更しました');
         }
     }
 }
