@@ -29,8 +29,6 @@ class Main extends PluginBase implements Listener
     public function onChat(PlayerChatEvent $ev)
     {
         $p = $ev->getPlayer();
-
-        var_dump("§" . $this->getColor($p) . $ev->getMessage());
         $ev->setMessage("§" . $this->getColor($p) . $ev->getMessage());
     }
 
