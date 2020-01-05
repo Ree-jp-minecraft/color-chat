@@ -1,5 +1,8 @@
-name: name
+name: ColorChat
 api: 3.0.0
-main: ree\template\Main
+main: ree\color\Main
 version: 1.0.0
 author: ree-jp
+permissions:
+  command.colorchat:
+    default: op
